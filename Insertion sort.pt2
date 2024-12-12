@@ -1,0 +1,57 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+void insertionSort(int vetor[], int tam_vetor) {
+    int i, j, item, min;
+
+    for (i = 0; i < tam_vetor - 1; i++) {
+        min = i;
+
+        for (j = i + 1; j < tam_vetor; j++) {
+            if (vetor[j] < vetor[min]) {
+                min = j;
+            }
+        }
+
+        item = vetor[i];
+        vetor[i] = vetor[min];
+        vetor[min] = item;
+    }
+}
+
+int main() {
+    const int tam_vetor = 20000;
+    int i, j, k, execucoes = 3, testes = 20;
+    int vetor[tam_vetor * testes];
+    clock_t inicio, fim;
+    double tempo = 0, tempo_medio = 0;
+
+    srand(time(NULL));
+
+    for (i = 1; i <= testes; i++) {
+        printf("Tamanho do vetor: %d\n\n", (tam_vetor*i));
+        tempo_medio = 0;
+
+        for (j = 0; j < execucoes; j++) {
+            for (k = 0; k < (tam_vetor * i); k++) {
+                vetor[k] = rand() % 101;
+            }
+
+            inicio = clock();
+
+            insertionSort(vetor, (tam_vetor * i));
+
+            fim = clock();
+
+            tempo = (double)(fim - inicio) / CLOCKS_PER_SEC;
+            tempo_medio += tempo;
+
+            printf("Tempo execucao %d: %f\n", j + 1, tempo);
+        }
+
+        tempo_medio /= execucoes;
+
+        printf("\nTempo medio: %f\n\n", tempo_medio);
+    }
+}

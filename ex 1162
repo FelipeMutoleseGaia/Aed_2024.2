@@ -30,9 +30,6 @@ unsigned ordena(int vet[], unsigned tam)
 
 	unsigned i, j, contador = 0, aux;
 
-	//A máquina só rotaciona 2 vagões por vez
-	//Por isso, um ínico 'for' que compara 2 a 2 elementos e faz a troca
-	//Enquanto o tamanho do vetor não chegar a 0;
 	while (tam--)
 	{
 
